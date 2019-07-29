@@ -58,7 +58,7 @@ public class ReflectiveAppTests {
                 ).toString();
 
         session.send(WEBSOCKET_COMMAND1, jsonString.getBytes());
-        session.send(WEBSOCKET_COMMAND2, jsonString.getBytes());
+        /*session.send(WEBSOCKET_COMMAND2, jsonString.getBytes());*/
 
         Assert.assertEquals(jsonString, blockingQueue.poll(1, SECONDS));
     }
