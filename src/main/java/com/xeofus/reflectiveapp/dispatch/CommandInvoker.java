@@ -17,10 +17,10 @@ class CommandInvoker {
         this.instance = instance;
     }
 
-    void invoke(AppCommand event) {
+    void invoke(AppCommand command) {
         try {
 
-            method.invoke(instance, event);
+            method.invoke(instance, command);
 
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new DispatchException(e);

@@ -15,9 +15,9 @@ public enum AppCommandsEnum {
     }
 
     public static AppCommandsEnum getByClass(Class<? extends AppCommand> appCommandClass) {
-        for (AppCommandsEnum event : AppCommandsEnum.values()) {
-            if (event.appCommandClass.isAssignableFrom(appCommandClass))
-                return event;
+        for (AppCommandsEnum commandsEnum : AppCommandsEnum.values()) {
+            if (commandsEnum.appCommandClass.isAssignableFrom(appCommandClass))
+                return commandsEnum;
         }
         return null;
     }

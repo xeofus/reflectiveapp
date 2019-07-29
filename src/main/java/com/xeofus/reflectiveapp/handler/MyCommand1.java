@@ -16,13 +16,13 @@ public class MyCommand1 {
     private final ObjectMapper mapper;
 
     @Autowired
-    private MyCommand1(WsCallbackDispatcher dispatcher, ObjectMapper mapper){
+    private MyCommand1(WsCallbackDispatcher dispatcher, ObjectMapper mapper) {
         this.dispatcher = dispatcher;
         this.mapper = mapper;
     }
 
     @HandlerMethod(AppCommandsEnum.COMMAND1)
-    public void runExecution(Command1 command1){
+    public void runExecution(Command1 command1) {
         try {
             dispatcher.dispatch(mapper.writeValueAsString(command1));
         } catch (JsonProcessingException e) {

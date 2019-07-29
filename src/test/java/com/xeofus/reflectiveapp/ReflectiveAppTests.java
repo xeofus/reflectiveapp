@@ -28,8 +28,8 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 public class ReflectiveAppTests {
     private static final String WEBSOCKET_URI = "http://localhost:8080/websocket";
     private static final String WEBSOCKET_TOPIC = "/topic";
-    private static final String WEBSOCKET_COMMAND1 = "/gateway/command/event1";
-    private static final String WEBSOCKET_COMMAND2 = "/gateway/command/event2";
+    private static final String WEBSOCKET_COMMAND1 = "/gateway/command/command1";
+    private static final String WEBSOCKET_COMMAND2 = "/gateway/command/command2";
     private BlockingQueue<String> blockingQueue;
     private WebSocketStompClient stompClient;
 

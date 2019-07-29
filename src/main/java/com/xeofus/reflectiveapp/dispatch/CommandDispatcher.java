@@ -52,12 +52,12 @@ public class CommandDispatcher {
         }
     }
 
-    public void dispatch(AppCommand event) {
+    public void dispatch(AppCommand command) {
 
         try {
-            warehouse.get(AppCommandsEnum.getByClass(event.getClass())).invoke(event);
+            warehouse.get(AppCommandsEnum.getByClass(command.getClass())).invoke(command);
         } catch (NullPointerException e) {
-            throw new MethodNotImplementedException("Для команды " + AppCommandsEnum.getByClass(event.getClass()) + " не нашлось аннотированного метода", e);
+            throw new MethodNotImplementedException("Для команды " + AppCommandsEnum.getByClass(command.getClass()) + " не нашлось аннотированного метода", e);
         }
 
     }

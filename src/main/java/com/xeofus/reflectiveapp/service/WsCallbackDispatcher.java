@@ -10,15 +10,15 @@ public class WsCallbackDispatcher {
     private final SimpMessageSendingOperations messagingTemplate;
 
     @Autowired
-    private WsCallbackDispatcher(SimpMessageSendingOperations messagingTemplate){
+    private WsCallbackDispatcher(SimpMessageSendingOperations messagingTemplate) {
         this.messagingTemplate = messagingTemplate;
     }
 
-    public void dispatch(String response){
+    public void dispatch(String response) {
         try {
-            if(null != this.messagingTemplate)
+            if (null != this.messagingTemplate)
                 this.messagingTemplate.convertAndSend("/topic", response);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
