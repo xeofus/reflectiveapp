@@ -57,7 +57,11 @@ public class CommandDispatcher {
         try {
             warehouse.get(AppCommandsEnum.getByClass(command.getClass())).invoke(command);
         } catch (NullPointerException e) {
-            throw new MethodNotImplementedException("Для команды " + AppCommandsEnum.getByClass(command.getClass()) + " не нашлось аннотированного метода", e);
+            throw new MethodNotImplementedException("Для команды "
+                    + AppCommandsEnum.getByClass(command.getClass())
+                    + " не нашлось метода",
+                    e
+            );
         }
 
     }

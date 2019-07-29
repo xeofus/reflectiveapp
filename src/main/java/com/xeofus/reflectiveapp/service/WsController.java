@@ -14,26 +14,29 @@ import java.io.IOException;
 
 @Controller
 public class WsController {
-    private final CommandDispatcher commandDispatcher;
-    private final ObjectMapper mapper;
+  private final CommandDispatcher dispatcher;
+  private final ObjectMapper mapper;
 
-    @Autowired
-    public WsController(CommandDispatcher commandDispatcher, ObjectMapper mapper) {
-        this.commandDispatcher = commandDispatcher;
-        this.mapper = mapper;
-    }
+  @Autowired
+  public WsController(CommandDispatcher dispatcher, ObjectMapper mapper) {
+      this.dispatcher = dispatcher;
+      this.mapper = mapper;
+  }
 
-    @MessageMapping("/command/{commandName}")
-    public void commandHandler(@DestinationVariable String commandName, Message message) {
-        try {
-            @SuppressWarnings("unchecked")
-            AppCommand appCommand = (AppCommand) mapper.readValue(
-                    new String((byte[]) message.getPayload()),
-                    AppCommandsEnum.valueOf(commandName.toUpperCase()).getAppCommandClass()
-            );
-            commandDispatcher.dispatch(appCommand);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+  @MessageMapping("/command/{commandName}")
+  public void commandHandler(
+          @DestinationVariable String commandName,
+          Message message
+  ) {
+      try {
+       @SuppressWarnings("unchecked")
+       AppCommand appCommand = (AppCommand) mapper.readValue(
+        new String((byte[]) message.getPayload()),
+        AppCommandsEnum.valueOf(commandName.toUpperCase()).getAppCommandClass()
+       );
+        dispatcher.dispatch(appCommand);
+      } catch (IOException e) {
+       e.printStackTrace();
+      }
+  }
 }
