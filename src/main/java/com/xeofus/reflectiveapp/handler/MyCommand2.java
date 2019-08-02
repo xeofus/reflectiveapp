@@ -12,21 +12,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 @CommandHandler
 public class MyCommand2 {
 
-    private final WsCallbackDispatcher wsCallbackDispatcher;
+    private final WsCallbackDispatcher dispatcher;
     private final ObjectMapper objectMapper;
 
     @Autowired
-    private MyCommand2(WsCallbackDispatcher wsCallbackDispatcher, ObjectMapper objectMapper) {
-        this.wsCallbackDispatcher = wsCallbackDispatcher;
+    private MyCommand2(WsCallbackDispatcher dispatcher, ObjectMapper objectMapper) {
+        this.dispatcher = dispatcher;
         this.objectMapper = objectMapper;
     }
 
     @HandlerMethod(AppCommandsEnum.COMMAND2)
     public void runExecution(Command2 command2) {
-        try {
-            wsCallbackDispatcher.dispatch(objectMapper.writeValueAsString(command2));
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+
+        Runnable run = () -> {
+            try {
+                dispatcher.dispatch(objectMapper.writeValueAsString(command2));
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+        };
+
+        new Thread(run).start();
     }
 }

@@ -23,10 +23,15 @@ public class MyCommand1 {
 
     @HandlerMethod(AppCommandsEnum.COMMAND1)
     public void runExecution(Command1 command1) {
-        try {
-            dispatcher.dispatch(mapper.writeValueAsString(command1));
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+
+        Runnable run = () -> {
+            try {
+                dispatcher.dispatch(mapper.writeValueAsString(command1));
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+        };
+
+        new Thread(run).start();
     }
 }
